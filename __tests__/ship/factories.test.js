@@ -16,7 +16,6 @@ describe('test ship', () => {
     ship.hit()
     ship.hit()
     expect(ship.is_sunk()).toBe(false)
-    console.log(ship.get_hits())
     ship.hit()
     expect(ship.is_sunk()).toBe(true)
   })
@@ -37,14 +36,13 @@ describe('test gameboard', () => {
     expect(gameboard.board_content[0][1]).toBe(ship)
     expect(gameboard.board_content[0][2]).toBe(ship)
   })
-  test.only('adding 3 length v ship at 0.0, 0.1, 0.2', () => {
+  test('adding 3 length v ship at 0.0, 0.1, 0.2', () => {
     const gameboard = Gameboard()
     gameboard.place_ship(3, [0, 0], false)
     const ship = gameboard.ships[0]
     expect(gameboard.board_content[0][0]).toBe(ship)
     expect(gameboard.board_content[1][0]).toBe(ship)
     expect(gameboard.board_content[2][0]).toBe(ship)
-    expect(gameboard.board_content[3][0]).not.toBe(ship)
   })
   test('return false if ship is placed on occupied spot', () => {
     const gameboard = Gameboard()

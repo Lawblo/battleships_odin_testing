@@ -8,23 +8,14 @@
 import { Ship } from './ship.js'
 
 function Gameboard() {
-  let board_content = [
-    [[], [], [], [], [], [], []],
-    [[], [], [], [], [], [], []],
-    [[], [], [], [], [], [], []],
-    [[], [], [], [], [], [], []],
-    [[], [], [], [], [], [], []],
-    [[], [], [], [], [], [], []],
-    [[], [], [], [], [], [], []]
-  ]
+  let board_content = init_board(7)
   let missed_attacks = []
   let hits = []
   let ships = []
   let destroyed_ships = []
 
   function init_board(size) {
-    let board = new Array(size).
-      fill(
+    let board = new Array(size).fill(
         new Array(size).fill(null)
       )
     return board
@@ -51,7 +42,6 @@ function Gameboard() {
     let x = coord[1]
     let y = coord[0]
     board_content[y][x] = (ship)
-    console.log(board_content)
   }
 
   function get_horizontal(length, start) {
@@ -80,7 +70,7 @@ function Gameboard() {
     const x = coordinates[1]
     const y = coordinates[0]
 
-    if (board_content[y][x].length !== 0) {
+    if (board_content[y][x]) {
       return true
     }
     return false
@@ -93,7 +83,7 @@ function Gameboard() {
     let x = coordinates[0]
     let y = coordinates[1]
 
-    if (board_content[y][x].length === 0) {
+    if (!board_content[y][x]) {
       missed_attacks.push([x, y])
       return false
     }
