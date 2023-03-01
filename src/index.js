@@ -1,2 +1,0 @@
-const Ship = ('./modules/ship')
-

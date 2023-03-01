@@ -6,14 +6,18 @@ function Ship(length) {
     if (hits === length) {
       return
     }
-    hits += 1
+    hits = hits + 1
   }
 
   function is_sunk() {
     return hits >= length ? true : false
   }
 
-  return { hit, is_sunk, length }
+  function get_hits() {
+    return hits
+  }
+
+  return { hit, is_sunk, length, get_hits, }
 }
 
 export { Ship }
