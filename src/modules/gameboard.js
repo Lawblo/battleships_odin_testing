@@ -18,7 +18,7 @@ function Gameboard() {
     [null, null, null, null, null, null, null]
   ]
   let missed_attacks = []
-  let hits = []
+  let connecting_attacks = []
   let ships = []
   let destroyed_ships = []
 
@@ -79,9 +79,6 @@ function Gameboard() {
   }
 
   function receive_attack(coordinates) {
-    //determine whether the attack hit
-    //if hit -> call hit() on correct ship
-    //if miss -> add coord to missed attacks
     let x = coordinates[0]
     let y = coordinates[1]
 
@@ -89,28 +86,33 @@ function Gameboard() {
       missed_attacks.push([x, y])
       return false
     }
-    board_content[y][x].hit()
-    hits.push([x, y])
+    const ship = board_content[y][x]
+    ship.hit()
+    connecting_attacks.push([x, y])
+    check_destroyed(ship)
+
     return true
   }
 
-  function all_ships_sunk() {
-    if (ships.length === 0) {
-      return true
+  function check_destroyed(ship) {
+    if (ship.is_sunk) {
+      destroyed_ships.push(ship)
     }
-    return false
+  }
+
+  function all_ships_sunk() {
+    return ships.every(ship => ship.is_sunk())
   }
 
   return {
-    hits,
+    connecting_attacks,
     ships,
     board_content,
     place_ship,
     all_ships_sunk,
     missed_attacks,
     receive_attack,
-    get_horizontal,
-    get_vertical
+    destroyed_ships
   }
 }
 
