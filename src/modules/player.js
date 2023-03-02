@@ -7,11 +7,8 @@ import { Gameboard } from "./gameboard";
 // Submarine[3]
 // Patrol Boat[2]
 
-function Player(name) {
-  let gameboard = Gameboard()
-
-
-  return {name, gameboard}
+function Player() {
+  return {}
 }
 
 export {Player}

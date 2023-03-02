@@ -122,8 +122,4 @@ describe('test receiving attacks', () => {
 })
 
 describe('test player', () => {
-  test('player receives name', () => {
-    let player1 = Player('player1')
-    expect(player1.name).toBe('player1')
-  })
 })
