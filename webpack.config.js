@@ -12,7 +12,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Development',
+      title: 'Battleship',
+      template: './src/index.html'
     }),
   ],
   output: {
@@ -40,6 +41,10 @@ module.exports = {
             ],
           },
         },
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
       },
     ],
   },

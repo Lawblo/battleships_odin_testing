@@ -1,6 +1,6 @@
 import { Ship } from '../../src/modules/ship'
 import { Gameboard } from '../../src/modules/gameboard.js'
-import { Player} from '../../src/modules/player.js'
+import { Computer, Player} from '../../src/modules/player.js'
 
 describe('test ship', () => {
 
@@ -121,5 +121,19 @@ describe('test receiving attacks', () => {
   })
 })
 
-describe('test player', () => {
+describe('test computer', () => {
+  test('computer can generate random valid moves', () => {
+    const computer = Player()
+    const valid_range = num => num < 7 && num >= 0
+    const move = computer.generate_random_move()
+    console.log(move)
+    expect(move.every(valid_range)).toBe(true)
+  })
+
+  test('perform move checks for discards previous moves', () => {
+    const player = Player()
+    player.perform_move([0, 0])
+    expect(player.perform_move([0, 0])).toBe(false)
+    expect(player.perform_move([1, 0])).toBe(true)
+  })
 })
