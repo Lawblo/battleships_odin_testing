@@ -8,18 +8,19 @@
 import { Ship } from './ship.js'
 
 function Gameboard() {
-  let board_content = init_board(7)
+  let board_content = [
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null]
+  ]
   let missed_attacks = []
   let hits = []
   let ships = []
   let destroyed_ships = []
-
-  function init_board(size) {
-    let board = new Array(size).fill(
-        new Array(size).fill(null)
-      )
-    return board
-  }
 
   function place_ship(length, start, is_horizontal = true) {
     let ship = Ship(length)
@@ -39,15 +40,15 @@ function Gameboard() {
   }
 
   function add_to_board(coord, ship) {
-    let x = coord[1]
-    let y = coord[0]
-    board_content[y][x] = (ship)
+    let x = coord[0]
+    let y = coord[1]
+    board_content[y][x] = ship
   }
 
   function get_horizontal(length, start) {
     let coords = []
-    for (let x = start[1]; x < start[1] + length; x++) {
-      let y = start[0]
+    for (let x = start[0]; x < start[0] + length; x++) {
+      let y = start[1]
       coords.push([x, y])
     }
     return coords
@@ -55,20 +56,21 @@ function Gameboard() {
 
   function get_vertical(length, start) {
     let coords = []
-    for (let y = start[0]; y < start[0] + length; y++) {
-      let x = start[1]
+    for (let y = start[1]; y < start[1] + length; y++) {
+      let x = start[0]
       coords.push([x, y])
     }
     return coords
   }
+
   function ship_off_board(coordinates) {
     return coordinates.some(coord => coord > 6 || coord < 0)
   }
 
 
   function ship_overlaps(coordinates) {
-    const x = coordinates[1]
-    const y = coordinates[0]
+    const x = coordinates[0]
+    const y = coordinates[1]
 
     if (board_content[y][x]) {
       return true
@@ -99,7 +101,17 @@ function Gameboard() {
     return false
   }
 
-  return { hits, ships, board_content, place_ship, all_ships_sunk, missed_attacks, receive_attack }
+  return {
+    hits,
+    ships,
+    board_content,
+    place_ship,
+    all_ships_sunk,
+    missed_attacks,
+    receive_attack,
+    get_horizontal,
+    get_vertical
+  }
 }
 
 export { Gameboard }

@@ -28,6 +28,17 @@ describe('test gameboard', () => {
     expect(gameboard.ships.length).toBe(1)
     expect(gameboard.ships[0].length).toBe(3)
   })
+
+  test('get horizontal to return correct cords', () => {
+    const gameboard = Gameboard()
+    expect(gameboard.get_horizontal(3, [0, 0])).toEqual([[0, 0], [1, 0], [2, 0]])
+  })
+
+  test('get verticaly to return correct cords', () => {
+    const gameboard = Gameboard()
+    expect(gameboard.get_vertical(3, [0, 0])).toEqual([[0, 0], [0, 1], [0, 2]])
+  })
+
   test('adding 3 length h ship at 0.0, 0.1, 0.2', () => {
     const gameboard = Gameboard()
     gameboard.place_ship(3, [0, 0], true)
@@ -35,6 +46,7 @@ describe('test gameboard', () => {
     expect(gameboard.board_content[0][0]).toBe(ship)
     expect(gameboard.board_content[0][1]).toBe(ship)
     expect(gameboard.board_content[0][2]).toBe(ship)
+    expect(gameboard.board_content[1][0]).not.toBe(ship)
   })
   test('adding 3 length v ship at 0.0, 0.1, 0.2', () => {
     const gameboard = Gameboard()
@@ -59,15 +71,31 @@ describe('test gameboard', () => {
     expect(gameboard.receive_attack([0, 0])).toBe(false)
     expect(gameboard.missed_attacks[0]).toEqual([0, 0])
   })
-  test('receive hit', () => {
+  test('successful hit recorded', () => {
     const gameboard = Gameboard()
     gameboard.place_ship(3, [0, 0])
     gameboard.receive_attack([0, 0])
     expect(gameboard.hits[0]).toEqual([0, 0])
+  })
+  test('all coords with hit ship register', () => {
+    const gameboard = Gameboard()
+    gameboard.place_ship(3, [0, 0])
+    gameboard.receive_attack([0, 0])
     expect(gameboard.board_content[0][0].get_hits()).toEqual(1)
-    expect(gameboard.board_content[1][0].get_hits()).toEqual(1)
-    expect(gameboard.board_content[2][0].get_hits()).toEqual(1)
+    expect(gameboard.board_content[0][1].get_hits()).toEqual(1)
+    expect(gameboard.board_content[0][2].get_hits()).toEqual(1)
+  })
+  test('ship in gameboard.ships record hit', () => {
+    const gameboard = Gameboard()
+    gameboard.place_ship(3, [0, 0])
+    gameboard.receive_attack([0, 0])
     expect(gameboard.ships[0].get_hits()).toEqual(1)
-    expect(gameboard.board_content[3][0].get_hits()).toEqual(0)
+  })
+  test('2nd ship not hit not record any hits', () => {
+    const gameboard = Gameboard()
+    gameboard.place_ship(3, [0, 0], true)
+    gameboard.place_ship(3, [0, 1], true)
+    gameboard.receive_attack([0, 0])
+    expect(gameboard.board_content[1][0].get_hits()).toBe(0)
   })
 })
