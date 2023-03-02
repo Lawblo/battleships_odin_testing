@@ -1,6 +1,6 @@
 import { Ship } from '../../src/modules/ship'
 import { Gameboard } from '../../src/modules/gameboard.js'
-
+import { Player} from '../../src/modules/player.js'
 
 describe('test ship', () => {
 
@@ -118,5 +118,12 @@ describe('test receiving attacks', () => {
     expect(gameboard.all_ships_sunk()).toBe(false)
     gameboard.receive_attack([1, 0])
     expect(gameboard.all_ships_sunk()).toBe(true)
+  })
+})
+
+describe('test player', () => {
+  test('player receives name', () => {
+    let player1 = Player('player1')
+    expect(player1.name).toBe('player1')
   })
 })
