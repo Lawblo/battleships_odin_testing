@@ -1,13 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@font-face {
+  font-family: font1942;
+  src: url('./fonts/1942.ttf');
+}
 
 :root {
-  font-family: 'Open Sans', sans-serif;
+  font-family: font1942;
   font-size: 16px;
-  --dark0: #0d1b2a;
-  --dark1: #1b263b;
-  --mid0: #415a77;
+
+  --dark-purple0: #1b1c2b;
+  --dark-purple1: #292a41;
+  --dark-blue0: #19212d;
+  --dark-turq0: #1b272c;
+  --mid0: #4c6185;
+  --midred: #b32228;
   --light1: #778da9;
   --light: #e0e1dd;
+  --radar-green: #96f97b;
+  --board-size: 35rem;
+  --outer-border: none;
 }
 
 * {
@@ -18,7 +28,7 @@
 body {
   width: 100vw;
   height: 100vh;
-  background-color: var(--dark1);
+  background-color: var(--dark-purple0);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -26,45 +36,95 @@ body {
 
 main {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
+.gameboard {
+  display: grid;
+  grid-template-columns: 1rem var(--board-size);
+  grid-template-rows: var(--board-size) 1rem ;
+}
+
+.gameboard-left {
+  display: flex;
+  height: var(--board-size);
+  justify-content: space-around;
+  flex-direction: column-reverse;
+}
+
+
+.gameboard-bottom {
+  display: flex;
+  justify-content: space-around;
+  width: var(--board-size);
+}
+
+.coord-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--radar-green);
+}
+
+
 .game-container {
-  border: solid 1rem var(--mid0);
+  /*border: solid 5px var(--mid0);*/
   display: grid;
   grid-template-rows: repeat(7, 1fr);
   grid-template-columns: repeat(7, 1fr);
-  background-color: var(--dark0);
-  height: 45rem;
-  width: 45rem;
-  min-width: 45rem;
-  min-height: 45rem;
+  height: var(--board-size);
+  width: var(--board-size);
+  min-width: var(--board-size);
+  min-height: var(--board-size);
 }
 
-.square:nth-child(even) {
-  background-color: var(--dark1);
+.square {
+  border: 1px dashed var(--radar-green);
+}
+
+.square-top {
+  border-top: var(--outer-border);
+}
+
+.square-bottom {
+  border-bottom: var(--outer-border);
+}
+
+.square-left {
+  border-left: var(--outer-border);
+}
+
+.square-right {
+  border-right: var(--outer-border);
 }
 
 h1 {
   font-size: 3rem;
-  color: var(--light1);
+  color: var(--radar-green);
+  margin: 1rem 0rem;
 }
 
 header {
   display: flex;
   justify-content: space-evenly;
-  background-color: var(--dark0);
 }
 
 footer * {
   display: flex;
-  background-color: var(--dark0);
+  background-color: var(--dark-purple1);
   justify-content: center;
   gap: .5rem;
   color: var(--light1);
 }
 
-
+#info-message {
+  text-align: center;
+  color: yellow;
+  font-size: 2rem;
+}
 
 
 
