@@ -1,6 +1,7 @@
 import { Ship } from '../../src/modules/ship'
 import { Gameboard } from '../../src/modules/gameboard.js'
-import { Computer, Player} from '../../src/modules/player.js'
+import { Player } from '../../src/modules/player.js'
+import { Gameloop_helpers } from '../../src/modules/gameloop'
 
 describe('test ship', () => {
 
@@ -125,15 +126,30 @@ describe('test computer', () => {
   test('computer can generate random valid moves', () => {
     const computer = Player()
     const valid_range = num => num < 7 && num >= 0
-    const move = computer.generate_random_move()
-    console.log(move)
+    const move = computer.generate_random_attack()
     expect(move.every(valid_range)).toBe(true)
   })
 
   test('perform move checks for discards previous moves', () => {
     const player = Player()
-    player.perform_move([0, 0])
-    expect(player.perform_move([0, 0])).toBe(false)
-    expect(player.perform_move([1, 0])).toBe(true)
+    player.perform_attack([0, 0])
+    expect(player.perform_attack([0, 0])).toBe(false)
+    expect(player.perform_attack([1, 0])).toBe(true)
+  })
+})
+
+describe('Gameloop_helpers tests', () => {
+  const player1 = Gameloop_helpers().initialize_player('p1')
+  const player2 = Gameloop_helpers().initialize_player('p2')
+  player2.gameboard.place_ship(5, [0, 0])
+  player2.gameboard.place_ship(5, [0, 1])
+  const gameloop = Gameloop_helpers()
+  test('player 1 attacks on player 2 returns success', () => {
+    expect(gameloop.attack(player1, player2, [0, 0])).toBe(true)
+    expect(gameloop.attack(player1, player2, [5, 0])).toBe(false)
+  })
+  test('player 1 attacks on player 2 is recorded on gameboard', () => {
+    expect(player2.gameboard.ships[0].get_hits()).toBe(1)
+    expect(player2.gameboard.ships[1].get_hits()).toBe(0)
   })
 })

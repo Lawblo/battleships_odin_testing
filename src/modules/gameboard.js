@@ -90,7 +90,9 @@ function Gameboard() {
   function check_destroyed(ship) {
     if (ship.is_sunk) {
       destroyed_ships.push(ship)
+      return true
     }
+    return false
   }
 
   function all_ships_sunk() {

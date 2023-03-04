@@ -7,10 +7,10 @@ import { Gameboard } from "./gameboard";
 // Submarine[3]
 // Patrol Boat[2]
 
-function Player(name='computer') {
+function Player(name) {
   const prev_moves = []
 
-  const perform_move = coord_xy => {
+  const perform_attack = coord_xy => {
     if (move_not_unique(coord_xy)) {
       return false
     }
@@ -23,7 +23,7 @@ function Player(name='computer') {
   } 
 
 
-  const generate_random_move = () => {
+  const generate_random_attack = () => {
     const rand_num = () => Math.floor(Math.random() * 7)
     let coords = [rand_num(), rand_num()]
     while (move_not_unique(coords)) {
@@ -34,8 +34,8 @@ function Player(name='computer') {
 
   return {
     name,
-    perform_move, 
-    generate_random_move
+    perform_attack, 
+    generate_random_attack
   }
 }
 

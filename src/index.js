@@ -1,6 +1,6 @@
 import './style.css'
 import { create_gameboard } from './game_ui_elements/gameboard_ui'
-import { handle_gameloop } from './modules/gameloop'
+import { Gameloop_helpers } from './modules/gameloop'
 
 document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('main')
@@ -9,5 +9,5 @@ document.addEventListener('DOMContentLoaded', () => {
   info_message.id = 'info-message'
   main.appendChild(info_message)
 
-  handle_gameloop()
+  Gameloop_helpers()
 })
