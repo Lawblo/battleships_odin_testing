@@ -7,6 +7,10 @@ const update_info = message => {
   info.textContent = message
 }
 
+const update_gameboard = () => {
+
+}
+
 export const Gameloop_helpers = (() => {
   const SHIPS = [
     { type: 'Carrier', size: 5 },
