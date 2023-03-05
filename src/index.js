@@ -1,13 +1,13 @@
 import './style.css'
-import { create_gameboard } from './game_ui_elements/gameboard_ui'
-import { Gameloop_helpers } from './modules/gameloop'
+import {create_gameboard } from './modules/game_ui_elements/gameboard_ui.js'
+import { GameloopHelpers, Gameloop } from './modules/gameloop'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const main = document.querySelector('main')
-  main.appendChild(create_gameboard())
-  const info_message = document.createElement('div')
-  info_message.id = 'info-message'
-  main.appendChild(info_message)
+  const p1_div = document.querySelector('#player1')
+  p1_div.appendChild(create_gameboard())
+  const p2_div = document.querySelector('#player2')
+  p2_div.appendChild(create_gameboard())
 
-  Gameloop_helpers()
+  Gameloop()
+  
 })

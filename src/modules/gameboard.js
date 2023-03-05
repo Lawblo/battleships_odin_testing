@@ -95,7 +95,7 @@ function Gameboard() {
     return false
   }
 
-  function all_ships_sunk() {
+  function check_defeat() {
     return ships.every(ship => ship.is_sunk())
   }
 
@@ -104,7 +104,7 @@ function Gameboard() {
     ships,
     board_content,
     place_ship,
-    all_ships_sunk,
+    check_defeat,
     missed_attacks,
     receive_attack,
     destroyed_ships

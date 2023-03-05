@@ -1,7 +1,7 @@
 import { Ship } from '../../src/modules/ship'
 import { Gameboard } from '../../src/modules/gameboard.js'
 import { Player } from '../../src/modules/player.js'
-import { Gameloop_helpers } from '../../src/modules/gameloop'
+import { GameloopHelpers } from '../../src/modules/gameloop'
 
 describe('test ship', () => {
 
@@ -116,9 +116,9 @@ describe('test receiving attacks', () => {
     const gameboard = Gameboard()
     gameboard.place_ship(2, [0, 0])
     gameboard.receive_attack([0, 0])
-    expect(gameboard.all_ships_sunk()).toBe(false)
+    expect(gameboard.check_defeat()).toBe(false)
     gameboard.receive_attack([1, 0])
-    expect(gameboard.all_ships_sunk()).toBe(true)
+    expect(gameboard.check_defeat()).toBe(true)
   })
 })
 
@@ -138,15 +138,15 @@ describe('test computer', () => {
   })
 })
 
-describe('Gameloop_helpers tests', () => {
-  const player1 = Gameloop_helpers().initialize_player('p1')
-  const player2 = Gameloop_helpers().initialize_player('p2')
+describe('GameloopHelpers tests', () => {
+  const player1 = GameloopHelpers.initialize_player('p1')
+  const player2 = GameloopHelpers.initialize_player('p2')
   player2.gameboard.place_ship(5, [0, 0])
   player2.gameboard.place_ship(5, [0, 1])
-  const gameloop = Gameloop_helpers()
+
   test('player 1 attacks on player 2 returns success', () => {
-    expect(gameloop.attack(player1, player2, [0, 0])).toBe(true)
-    expect(gameloop.attack(player1, player2, [5, 0])).toBe(false)
+    expect(GameloopHelpers.attack(player1, player2, [0, 0])).toBe(true)
+    expect(GameloopHelpers.attack(player1, player2, [5, 0])).toBe(false)
   })
   test('player 1 attacks on player 2 is recorded on gameboard', () => {
     expect(player2.gameboard.ships[0].get_hits()).toBe(1)

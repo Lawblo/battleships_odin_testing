@@ -20,7 +20,6 @@ const create_gamebpard_coords = () => {
   return coords
 }
 
-const create_gamebpard_outer_corner = () => { }
 
 const create_gameboard_inner = () => {
   const gameboard_inner = document.createElement('div')
@@ -56,10 +55,6 @@ const get_square_location = (x, y) => {
     location.push('square-top')
   }
   return location
-}
-
-const place_ships = (ships) => {
-
 }
 
 export { create_gameboard }
