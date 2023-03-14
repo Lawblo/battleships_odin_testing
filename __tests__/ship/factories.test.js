@@ -1,7 +1,7 @@
-import { Ship } from '../../src/modules/ship'
-import { Gameboard } from '../../src/modules/gameboard.js'
-import { Player } from '../../src/modules/player.js'
-import { GameloopHelpers } from '../../src/modules/gameloop'
+import { Ship } from '../../src/modules/logic/ship'
+import { Gameboard } from '../../src/modules/logic/gameboard'
+import { Player } from '../../src/modules/logic/player'
+import {GameloopHelpers} from '../../src/modules/logic/Gameloop_helpers'
 
 describe('test ship', () => {
 
@@ -65,6 +65,13 @@ describe('test ship placement on board', () => {
     const gameboard = Gameboard()
     expect(gameboard.place_ship(3, [6, 6], true)).toBe(false)
     expect(gameboard.place_ship(3, [0, 0], true)).toBe(true)
+  })
+  test('computer can place random valid ships', () => {
+    const gameboard = Gameboard()
+    for (let i of [5, 4, 3, 3, 2]) {
+      gameboard.place_random_ship(i)
+    }
+    expect(gameboard.ships.length).toBe(5)
   })
 })
 

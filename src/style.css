@@ -16,7 +16,7 @@
   --light1: #778da9;
   --light: #e0e1dd;
   --radar-green: #96f97b;
-  --board-size: 35rem;
+  --board-size: 15rem;
   --outer-border: none;
 }
 
@@ -117,6 +117,10 @@ footer * {
   justify-content: center;
   gap: .5rem;
   color: var(--light1);
+}
+
+.ship-square {
+  background-color: red;
 }
 
 #info-message {

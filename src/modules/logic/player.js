@@ -1,13 +1,4 @@
-import { Gameboard } from "./gameboard";
-
-// Ship types: 
-// Carrier[5]
-// Battleship[4]
-// Destroyer[3]
-// Submarine[3]
-// Patrol Boat[2]
-
-function Player(name) {
+export function Player(name) {
   const prev_moves = []
 
   const perform_attack = coord_xy => {
@@ -39,4 +30,3 @@ function Player(name) {
   }
 }
 
-export { Player }

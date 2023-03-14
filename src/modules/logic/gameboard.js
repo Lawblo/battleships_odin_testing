@@ -32,6 +32,26 @@ function Gameboard() {
     return true
   }
 
+  function get_random_int(max) {
+    return Math.floor(Math.random() * max-1)
+  }
+
+  function get_random_placement() {
+    const x = get_random_int(6)
+    const y = get_random_int(6)
+    return [x, y]
+  }
+
+  function get_random_direction() {
+    return get_random_int(1) == 1 ? true : false
+  }
+
+  function place_random_ship(length) {
+    while (!place_ship(length, get_random_placement(), get_random_direction())) {
+      continue
+    }
+  }
+
   function add_to_board(coord, ship) {
     let x = coord[0]
     let y = coord[1]
@@ -107,7 +127,8 @@ function Gameboard() {
     check_defeat,
     missed_attacks,
     receive_attack,
-    destroyed_ships
+    destroyed_ships,
+    place_random_ship
   }
 }
 
