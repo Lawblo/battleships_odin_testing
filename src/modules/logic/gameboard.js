@@ -16,6 +16,7 @@ function Gameboard() {
   let destroyed_ships = []
 
   function place_ship(length, start, is_horizontal = true) {
+    console.log(start)
     let ship = Ship(length)
     let place_coords = is_horizontal
       ? get_horizontal(length, start)

@@ -11,6 +11,7 @@ export const GameloopHelpers = (() => {
   ]
 
   function initialize_player(name, board_id) {
+    //Kan endre til å bare ta inn navn, og evt lage gameboard divs da
     return { player: Player(name), gameboard: Gameboard(), board_id: board_id }
   }
 

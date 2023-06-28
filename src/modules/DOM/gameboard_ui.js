@@ -59,4 +59,8 @@ const get_square_location = (x, y) => {
   return location
 }
 
+function update_info(text) {
+
+}
+
 export { create_gameboard }
